@@ -12,7 +12,7 @@ yPos = [];
 xIncreament = [];
 yIncreament = [];
 sizeOfArr = size(ListOfWp);
-numberOfNodeForPath = sizeOfArr(1,2);
+numberOfNodeForPath = sizeOfArr(1,1);
 
 for i=1:numberOfNodeForPath
 %     

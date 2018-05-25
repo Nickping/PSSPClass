@@ -3,6 +3,8 @@ function [ EndNode,EndAngle ] = RunningFreeWithoutDisconnection( Origin,Destinat
 %   Detailed explanation goes here
  EndNode=Destination;
 [ Xcoordinates,Ycoordinates] = WaypointsToCoordinates( [Origin,Destination] );
+
+
 DeltaY=Ycoordinates(2)-Ycoordinates(1);
 DeltaX=Xcoordinates(2)-Xcoordinates(1);
 EndAngle=atan2d(DeltaY,DeltaX);

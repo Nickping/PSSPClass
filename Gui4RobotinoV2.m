@@ -22,7 +22,7 @@ function varargout = Gui4RobotinoV2(varargin)
 
 % Edit the above text to modify the response to help Gui4RobotinoV2
 
-% Last Modified by GUIDE v2.5 23-May-2018 14:30:43
+% Last Modified by GUIDE v2.5 25-May-2018 13:30:09
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -62,7 +62,14 @@ guidata(hObject, handles);
 % uiwait(handles.figure1);
 evalin('base','clear all')
 assignin('base','ExitFlag',0);
-assignin('base','InitialAngle',0)
+assignin('base','InitialAngle',0);
+
+DistanceMatrix = xlsread('WeightMatrix.xls');
+DistanceMatrix = DistanceMatrix(2:end,2:end);
+IndexInf = find(DistanceMatrix==0);
+DistanceMatrix(IndexInf)=Inf;
+assignin('base','DistanceMatrix',DistanceMatrix);
+
 
 % --- Outputs from this function are returned to the command line.
 function varargout = Gui4RobotinoV2_OutputFcn(hObject, eventdata, handles) 
@@ -290,3 +297,33 @@ function EditInitialAngle_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+% --- Executes on button press in pushbutton5.
+function pushbutton5_Callback(hObject, eventdata, handles)
+DistanceMatrix = evalin('base','DistanceMatrix');
+ListOfWp = pathPlanning(DistanceMatrix,0,1,16,1);
+Nodes = NodesToCoordinates(ListOfWp);
+assignin('base','Coordinates',Nodes);
+assignin('base','ListOfWp',ListOfWp);
+ListOfWp = transpose(ListOfWp);
+NodeStr = num2str(ListOfWp);
+disp(NodeStr);
+NodesToGo = findobj('Tag','Node');
+set(NodesToGo,'string',NodeStr);
+
+
+
+
+
+% hObject    handle to pushbutton5 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% --- Executes on button press in pushbutton6.
+function pushbutton6_Callback(hObject, eventdata, handles)
+
+
+% hObject    handle to pushbutton6 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
