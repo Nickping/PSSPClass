@@ -6,12 +6,15 @@ dummySet = [];
 
 
 sizeOfArr = size(ListOfWp);
-numberOfNodeForPath = sizeOfArr(1,2);
-sizeOfCol = 3;%distanceMatrix Size
+numberOfNodeForPath = sizeOfArr(1,1);
+disp('numberOfNodeForPath==')
+disp(numberOfNodeForPath);
+sizeOfCol = 4;%distanceMatrix Size
 disp('nodesToCoordinate');
 disp(ListOfWp);
 for i=1:numberOfNodeForPath
-    index = (ListOfWp(1,i)-1);
+    disp(ListOfWp(i,1));
+    index = (ListOfWp(i,1)-1);
     if index == 0
         xCoordinate = 0;
         yCoordinate = 0;

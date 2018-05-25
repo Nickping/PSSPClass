@@ -9,7 +9,6 @@ switch method
         ListOfWp = GreedyPath(distanceMatrix,origin,target);
     case 1
         ListOfWp = Dijkstra(distanceMatrix,origin,target);
-        disp(ListOfWp);
     case 2
         ListOfWp = Astar(distanceMatrix,origin,target);
        
