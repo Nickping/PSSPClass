@@ -11,7 +11,7 @@ switch method
         ListOfWp = Dijkstra(distanceMatrix,origin,target);
         disp(ListOfWp);
     case 2
-        ListOfWp = Astar(distanceMatrix,origin,target);
+        ListOfWp = Astar(distnace
        
     otherwise
 end
