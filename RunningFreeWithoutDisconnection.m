@@ -18,10 +18,11 @@ T=[[-0.500000000000000,-0.866000000000000,0.150000000000000;1,0,0.15000000000000
 [success]=Turn(AnglesToTurn,OdometryId,MotorId0,MotorId1,MotorId2)
 [d1,d2,theta]=WhereAmI(CameraId,Rc_ext, Tc_ext, KK )
 if (~isempty(d1) && evalin('base','ExitFlag')==0) 
-    while isempty(d2)
+    while isempty(d2)%state 1 
         [Step] = StateForward(d1,theta,T);
         PublishMotors(Step,MotorId0,MotorId1,MotorId2);
         [d1,d2,theta]=WhereAmI(CameraId,Rc_ext, Tc_ext, KK );
+        % 물체 발견하면 멈추는 코드 여기다 짜야됨
     end
         d2ini = d2;
         Odometry_set( OdometryId, 0, 0, 0 );
@@ -30,7 +31,8 @@ if (~isempty(d1) && evalin('base','ExitFlag')==0)
             Odometry_set( OdometryId, 0, 0, 0 );
             [ y, x, TurnedAngle ] = Odometry_get( OdometryId );
         end
-    while (d2ini>=y && evalin('base','ExitFlag')==0)
+    while (d2ini>=y && evalin('base','ExitFlag')==0) %state 2
+        %여기다가도 물체 발견시 정지하는 코드 if obstacle is presented...~~ SharpDetection 
         [Step] = StateForward(d1,theta,T);
         PublishMotors(Step,MotorId0,MotorId1,MotorId2);
         [ y, x, TurnedAngle ] = Odometry_get( OdometryId );

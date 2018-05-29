@@ -22,7 +22,7 @@ function varargout = Gui4RobotinoV2(varargin)
 
 % Edit the above text to modify the response to help Gui4RobotinoV2
 
-% Last Modified by GUIDE v2.5 25-May-2018 13:30:09
+% Last Modified by GUIDE v2.5 29-May-2018 13:22:06
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -69,6 +69,10 @@ DistanceMatrix = DistanceMatrix(2:end,2:end);
 IndexInf = find(DistanceMatrix==0);
 DistanceMatrix(IndexInf)=Inf;
 assignin('base','DistanceMatrix',DistanceMatrix);
+drawingGridlayout();
+
+function drawingGridlayout()
+
 
 
 % --- Outputs from this function are returned to the command line.
@@ -304,6 +308,7 @@ function pushbutton5_Callback(hObject, eventdata, handles)
 DistanceMatrix = evalin('base','DistanceMatrix');
 ListOfWp = pathPlanning(DistanceMatrix,0,1,16,1);
 Nodes = NodesToCoordinates(ListOfWp);
+
 assignin('base','Coordinates',Nodes);
 assignin('base','ListOfWp',ListOfWp);
 ListOfWp = transpose(ListOfWp);
@@ -327,3 +332,14 @@ function pushbutton6_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton6 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes during object creation, after setting all properties.
+function axes1_CreateFcn(hObject, eventdata, handles)
+
+hold on;
+% hObject    handle to axes1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: place code in OpeningFcn to populate axes1
