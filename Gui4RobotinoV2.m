@@ -312,7 +312,8 @@ ListOfWp = pathPlanning(DistanceMatrix,0,1,10,algorithm);
 Nodes = NodesToCoordinates(ListOfWp);
 
 assignin('base','Coordinates',Nodes);
-assignin('base','ListOfWp',ListOfWp);
+%assignin('base','ListOfWp',ListOfWp);
+assignin('base','ListOfWayPoints',ListOfWp);
 
 if evalin('base','Algorithm') ~= 0 %
 ListOfWp = transpose(ListOfWp);
