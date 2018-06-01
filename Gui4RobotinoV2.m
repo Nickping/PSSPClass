@@ -242,7 +242,7 @@ function GoButton_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-%%%% Find every Text Object
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Find every Text Object
 Node1 = findobj('Tag','Node1');
 Node2 = findobj('Tag','Node2');
 Node3 = findobj('Tag','Node3');
@@ -260,7 +260,7 @@ Node14 = findobj('Tag','Node14');
 Node15 = findobj('Tag','Node15');
 Node16 = findobj('Tag','Node16');
 
-%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 set(handles.GoButton,'BackgroundColor','yellow');
 ComId=evalin('base','ComId');
 OdometryId=evalin('base','OdometryId');
@@ -333,11 +333,10 @@ Nodes = NodesToCoordinates(ListOfWp);
 
 assignin('base','Coordinates',Nodes);
 %assignin('base','ListOfWp',ListOfWp);
-assignin('base','ListOfWayPoints',ListOfWp);
-
 if evalin('base','Algorithm') ~= 0 %
 ListOfWp = transpose(ListOfWp);
 end
+assignin('base','ListOfWayPoints',ListOfWp);
 
 NodeStr = num2str(ListOfWp);
 disp(NodeStr);
@@ -358,6 +357,90 @@ set(EditListOfWayPoints,'string',NodeStr);
 
 % --- Executes on button press in pushbutton6.
 function pushbutton6_Callback(hObject, eventdata, handles)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Find every Text Object
+
+Node1 = findobj('Tag','Node1');
+Node2 = findobj('Tag','Node2');
+Node3 = findobj('Tag','Node3');
+Node4 = findobj('Tag','Node4');
+Node5 = findobj('Tag','Node5');
+Node6 = findobj('Tag','Node6');
+Node7 = findobj('Tag','Node7');
+Node8 = findobj('Tag','Node8');
+Node9 = findobj('Tag','Node9');
+Node10 = findobj('Tag','Node10');
+Node11 = findobj('Tag','Node11');
+Node12 = findobj('Tag','Node12');
+Node13 = findobj('Tag','Node13');
+Node14 = findobj('Tag','Node14');
+Node15 = findobj('Tag','Node15');
+Node16 = findobj('Tag','Node16');
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+NodesToGo = evalin('base','ListOfWayPoints');
+disp('NodesToGoTest');
+disp(NodesToGo);
+% disp(num2str(NodesToGo(1,2)));
+
+% disp(NodesToChangeColor);
+
+
+sizeOfNodes = size(NodesToGo);
+disp(sizeOfNodes);
+for i = 1: sizeOfNodes(1,2)
+    
+    switch NodesToGo(1,i)
+        case 1
+            set(Node1,'BackgroundColor','green');
+        case 2
+            set(Node2,'BackgroundColor','green');
+        case 3
+            set(Node3,'BackgroundColor','green');
+        case 4
+                 set(Node4,'BackgroundColor','green');
+
+        case 5
+                        set(Node5,'BackgroundColor','green');
+
+        case 6
+                        set(Node6,'BackgroundColor','green');
+
+        case 7
+                        set(Node7,'BackgroundColor','green');
+
+        case 8
+                        set(Node8,'BackgroundColor','green');
+
+        case 9
+                        set(Node9,'BackgroundColor','green');
+
+        case 10
+                        set(Node10,'BackgroundColor','green');
+
+        case 11
+                        set(Node11,'BackgroundColor','green');
+
+        case 12
+                        set(Node12,'BackgroundColor','green');
+
+        case 13
+                        set(Node13,'BackgroundColor','green');
+
+        case 14
+                        set(Node14,'BackgroundColor','green');
+
+        case 15
+                        set(Node15,'BackgroundColor','green');
+
+        case 16
+                        set(Node16,'BackgroundColor','green');
+
+    end
+    
+
+    
+end
 
 
 % hObject    handle to pushbutton6 (see GCBO)
@@ -366,47 +449,6 @@ function pushbutton6_Callback(hObject, eventdata, handles)
 
 
 % --- Executes during object creation, after setting all properties.
-function axes1_CreateFcn(hObject, eventdata, handles)
-
-hold on;
-           
-%handels.Name,....
-
-%hold on- >CreateFcn 
-% for i=1:size(gridSource1,1)-1
-% 
-%     plot(gridSource1(i:i+1,1),gridSource1(i:i+1,2),'-r');
-% 
-% end
-% for i=1:size(gridSource2,1)-1
-%     plot(gridSource2(i:i+1,1),gridSource2(i:i+1,2),'-r');
-% end
-% 
-% for i=1:size(gridSource3,1)-1
-%     plot(gridSource3(i:i+1,1),gridSource3(i:i+1,2),'-r');
-% end
-% for i=1:size(gridSource4,1)-1
-%     plot(gridSource4(i:i+1,1),gridSource4(i:i+1,2),'-r');
-% end
-% for i=1:size(gridSource5,1)-1
-%     plot(gridSource5(i:i+1,1),gridSource5(i:i+1,2),'-r');
-% end
-% for i=1:size(gridSource6,1)-1
-%     plot(gridSource6(i:i+1,1),gridSource6(i:i+1,2),'-r');
-% end
-% for i=1:size(gridSource7,1)-1
-%     plot(gridSource7(i:i+1,1),gridSource7(i:i+1,2),'-r');
-% end
-% for i=1:size(gridSource8,1)-1
-%     plot(gridSource8(i:i+1,1),gridSource8(i:i+1,2),'-r');
-% end
-
-
-% hObject    handle to axes1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: place code in OpeningFcn to populate axes1
 
 
 % --- Executes on selection change in listbox1.

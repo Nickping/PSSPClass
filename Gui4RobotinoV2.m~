@@ -92,37 +92,37 @@ function LoadButton_Callback(hObject, eventdata, handles)
 % hObject    handle to LoadButton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-evalin('base','ComId = Com_construct');
-evalin('base','MotorId0 = Motor_construct( 0 )');
-evalin('base','MotorId1 = Motor_construct( 1 )');
-evalin('base','MotorId2 = Motor_construct( 2 )');
-evalin('base','CameraId = Camera_construct');
-evalin('base','OdometryId = Odometry_construct');
-evalin('base','Com_setAddress(ComId, ''192.168.1.203'')');
-evalin('base','Com_connect(ComId)');
-evalin('base','Motor_setComId( MotorId0, ComId )');
-evalin('base','Motor_setComId( MotorId1, ComId )');
-evalin('base','Motor_setComId( MotorId2, ComId )');
-evalin('base','Camera_setComId(CameraId, ComId)');
-evalin('base','Odometry_setComId( OdometryId, ComId )');
-evalin('base','clc');
-evalin('base','clear img');
-evalin('base','load ExtrinsicResults.mat');
-evalin('base','clear theta');
-Rc_ext=evalin('base','Rc_ext');
-Tc_ext=evalin('base','Tc_ext');
-KK=evalin('base','KK');
-CameraId=evalin('base','CameraId');
-while evalin('base','exist(''img'')~=1')
-     if ~(Camera_setStreaming(CameraId, 1) == 1)
-        disp('Camera_setStreaming failed.');
-     end
-     if (Camera_grab(CameraId) == 1)
-        img = Camera_getImage( CameraId );
-        assignin('base','img',img);
-     end
-     pause(.1);
-end
+% evalin('base','ComId = Com_construct');
+% evalin('base','MotorId0 = Motor_construct( 0 )');
+% evalin('base','MotorId1 = Motor_construct( 1 )');
+% evalin('base','MotorId2 = Motor_construct( 2 )');
+% evalin('base','CameraId = Camera_construct');
+% evalin('base','OdometryId = Odometry_construct');
+% evalin('base','Com_setAddress(ComId, ''192.168.1.203'')');
+% evalin('base','Com_connect(ComId)');
+% evalin('base','Motor_setComId( MotorId0, ComId )');
+% evalin('base','Motor_setComId( MotorId1, ComId )');
+% evalin('base','Motor_setComId( MotorId2, ComId )');
+% evalin('base','Camera_setComId(CameraId, ComId)');
+% evalin('base','Odometry_setComId( OdometryId, ComId )');
+% evalin('base','clc');
+% evalin('base','clear img');
+% evalin('base','load ExtrinsicResults.mat');
+% evalin('base','clear theta');
+% Rc_ext=evalin('base','Rc_ext');
+% Tc_ext=evalin('base','Tc_ext');
+% KK=evalin('base','KK');
+% CameraId=evalin('base','CameraId');
+% while evalin('base','exist(''img'')~=1')
+%      if ~(Camera_setStreaming(CameraId, 1) == 1)
+%         disp('Camera_setStreaming failed.');
+%      end
+%      if (Camera_grab(CameraId) == 1)
+%         img = Camera_getImage( CameraId );
+%         assignin('base','img',img);
+%      end
+%      pause(.1);
+% end
 
 % (msgbox('Cam initialised and robot ready to go!','Information to the user','warn'))
 set(handles.text2,'BackgroundColor','green');
@@ -241,6 +241,26 @@ function GoButton_Callback(hObject, eventdata, handles)
 % hObject    handle to GoButton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Find every Text Object
+Node1 = findobj('Tag','Node1');
+Node2 = findobj('Tag','Node2');
+Node3 = findobj('Tag','Node3');
+Node4 = findobj('Tag','Node4');
+Node5 = findobj('Tag','Node5');
+Node6 = findobj('Tag','Node6');
+Node7 = findobj('Tag','Node7');
+Node8 = findobj('Tag','Node8');
+Node9 = findobj('Tag','Node9');
+Node10 = findobj('Tag','Node10');
+Node11 = findobj('Tag','Node11');
+Node12 = findobj('Tag','Node12');
+Node13 = findobj('Tag','Node13');
+Node14 = findobj('Tag','Node14');
+Node15 = findobj('Tag','Node15');
+Node16 = findobj('Tag','Node16');
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 set(handles.GoButton,'BackgroundColor','yellow');
 ComId=evalin('base','ComId');
 OdometryId=evalin('base','OdometryId');
@@ -256,7 +276,7 @@ set(handles.text13,'String',num2str(InitialNode));%actual Node
 InitialAngle=evalin('base','InitialAngle');
 set(handles.text15,'String','');
 TargetNode=evalin('base','ListOfWayPoints(2)');
-set(handles.text14,'String',num2str(TargetNode));
+set(handles.text14,'String',num2str(TargetNode));%next node
 evalin('base','clear EndAngle');
 ListOfWayPoints=evalin('base','ListOfWayPoints');
 for i=1:length(ListOfWayPoints)-1
@@ -338,6 +358,67 @@ set(EditListOfWayPoints,'string',NodeStr);
 
 % --- Executes on button press in pushbutton6.
 function pushbutton6_Callback(hObject, eventdata, handles)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Find every Text Object
+
+Node1 = findobj('Tag','Node1');
+Node2 = findobj('Tag','Node2');
+Node3 = findobj('Tag','Node3');
+Node4 = findobj('Tag','Node4');
+Node5 = findobj('Tag','Node5');
+Node6 = findobj('Tag','Node6');
+Node7 = findobj('Tag','Node7');
+Node8 = findobj('Tag','Node8');
+Node9 = findobj('Tag','Node9');
+Node10 = findobj('Tag','Node10');
+Node11 = findobj('Tag','Node11');
+Node12 = findobj('Tag','Node12');
+Node13 = findobj('Tag','Node13');
+Node14 = findobj('Tag','Node14');
+Node15 = findobj('Tag','Node15');
+Node16 = findobj('Tag','Node16');
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+NodesToGo = evalin('base','ListOfWayPoints');
+disp('NodesToGoTest');
+% disp(num2str(NodesToGo(1,2)));
+
+% disp(NodesToChangeColor);
+
+
+sizeOfNodes = size(NodesToGo);
+disp(sizeOfNodes(1,2));
+for i = 1: sizeOfNodes(1,2)
+    
+    NodesToChangeColor = strcat('Node',num2str(NodesToGo(1,i)));
+    disp(NodesToChangeColor);
+    switch i
+        case 1
+            set(Node1,'BackgroundColor','green');
+        case 2
+            set(Node1,'BackgroundColor','green');
+        case 3
+                        set(Node1,'BackgroundColor','green');
+
+        case 4
+        case 5
+        case 6
+        case 7
+        case 8
+        case 9
+        case 10
+        case 11
+        case 12
+        case 13
+        case 14
+        case 15
+        case 16
+    end
+    Nodex = findObj('Tag',convertCharsToStrings(NodesToChangeColor));
+    
+
+    
+end
 
 
 % hObject    handle to pushbutton6 (see GCBO)
@@ -346,47 +427,6 @@ function pushbutton6_Callback(hObject, eventdata, handles)
 
 
 % --- Executes during object creation, after setting all properties.
-function axes1_CreateFcn(hObject, eventdata, handles)
-
-hold on;
-           
-%handels.Name,....
-
-%hold on- >CreateFcn 
-% for i=1:size(gridSource1,1)-1
-% 
-%     plot(gridSource1(i:i+1,1),gridSource1(i:i+1,2),'-r');
-% 
-% end
-% for i=1:size(gridSource2,1)-1
-%     plot(gridSource2(i:i+1,1),gridSource2(i:i+1,2),'-r');
-% end
-% 
-% for i=1:size(gridSource3,1)-1
-%     plot(gridSource3(i:i+1,1),gridSource3(i:i+1,2),'-r');
-% end
-% for i=1:size(gridSource4,1)-1
-%     plot(gridSource4(i:i+1,1),gridSource4(i:i+1,2),'-r');
-% end
-% for i=1:size(gridSource5,1)-1
-%     plot(gridSource5(i:i+1,1),gridSource5(i:i+1,2),'-r');
-% end
-% for i=1:size(gridSource6,1)-1
-%     plot(gridSource6(i:i+1,1),gridSource6(i:i+1,2),'-r');
-% end
-% for i=1:size(gridSource7,1)-1
-%     plot(gridSource7(i:i+1,1),gridSource7(i:i+1,2),'-r');
-% end
-% for i=1:size(gridSource8,1)-1
-%     plot(gridSource8(i:i+1,1),gridSource8(i:i+1,2),'-r');
-% end
-
-
-% hObject    handle to axes1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: place code in OpeningFcn to populate axes1
 
 
 % --- Executes on selection change in listbox1.
