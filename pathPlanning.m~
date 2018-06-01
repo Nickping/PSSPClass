@@ -5,14 +5,15 @@ ListOfWp = [];
 dummy = [];
 
 switch method
-    case 0  
+    case 0
         ListOfWp = GreedyPath(distanceMatrix,origin,target);
-    case 1  
+    case 1
         disp('find the path with Astar');
-        ListOfWp = Astar(distanceMatrix,origin,target);
-    case 2  
-        disp('find the path with Dijkstra');
+                ListOfWp = Astar(distanceMatrix,origin,target);
+
         ListOfWp = Dijkstra(distanceMatrix,origin,target);
+    case 2
+                ListOfWp = Dijkstra(distanceMatrix,origin,target);
        
     otherwise
 end

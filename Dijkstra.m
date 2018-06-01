@@ -7,7 +7,7 @@
 %   [Path, PathCost] = Dijkstra(DM, 1, 5) -> returns the path from node 
 %                      1 to node 5, and the total path cost.
 %--------------------------------------------------------------------------
-%By Josep Àngel Oltra Oltra (05/2018)
+%By Josep ?ngel Oltra Oltra (05/2018)
 function [ Path, PathCost ] = Dijkstra( DistanceMatrix , Origin, Target )
     if size(DistanceMatrix, 1) ~= size(DistanceMatrix, 2)
        error('Error. The distance matrix has to be a square matrix.');

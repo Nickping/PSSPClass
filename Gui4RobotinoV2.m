@@ -307,12 +307,17 @@ end
 % --- Executes on button press in pushbutton5.
 function pushbutton5_Callback(hObject, eventdata, handles)
 DistanceMatrix = evalin('base','DistanceMatrix');
-ListOfWp = pathPlanning(DistanceMatrix,0,1,16,1);
+algorithm = evalin('base','Algorithm');
+ListOfWp = pathPlanning(DistanceMatrix,0,1,10,algorithm);
 Nodes = NodesToCoordinates(ListOfWp);
 
 assignin('base','Coordinates',Nodes);
 assignin('base','ListOfWp',ListOfWp);
+
+if evalin('base','Algorithm') ~= 0 %
 ListOfWp = transpose(ListOfWp);
+end
+
 NodeStr = num2str(ListOfWp);
 disp(NodeStr);
 NodesToGo = findobj('Tag','Node');
@@ -343,33 +348,33 @@ hold on;
 %handels.Name,....
 
 %hold on- >CreateFcn 
-for i=1:size(gridSource1,1)-1
-
-    plot(gridSource1(i:i+1,1),gridSource1(i:i+1,2),'-r');
-
-end
-for i=1:size(gridSource2,1)-1
-    plot(gridSource2(i:i+1,1),gridSource2(i:i+1,2),'-r');
-end
-
-for i=1:size(gridSource3,1)-1
-    plot(gridSource3(i:i+1,1),gridSource3(i:i+1,2),'-r');
-end
-for i=1:size(gridSource4,1)-1
-    plot(gridSource4(i:i+1,1),gridSource4(i:i+1,2),'-r');
-end
-for i=1:size(gridSource5,1)-1
-    plot(gridSource5(i:i+1,1),gridSource5(i:i+1,2),'-r');
-end
-for i=1:size(gridSource6,1)-1
-    plot(gridSource6(i:i+1,1),gridSource6(i:i+1,2),'-r');
-end
-for i=1:size(gridSource7,1)-1
-    plot(gridSource7(i:i+1,1),gridSource7(i:i+1,2),'-r');
-end
-for i=1:size(gridSource8,1)-1
-    plot(gridSource8(i:i+1,1),gridSource8(i:i+1,2),'-r');
-end
+% for i=1:size(gridSource1,1)-1
+% 
+%     plot(gridSource1(i:i+1,1),gridSource1(i:i+1,2),'-r');
+% 
+% end
+% for i=1:size(gridSource2,1)-1
+%     plot(gridSource2(i:i+1,1),gridSource2(i:i+1,2),'-r');
+% end
+% 
+% for i=1:size(gridSource3,1)-1
+%     plot(gridSource3(i:i+1,1),gridSource3(i:i+1,2),'-r');
+% end
+% for i=1:size(gridSource4,1)-1
+%     plot(gridSource4(i:i+1,1),gridSource4(i:i+1,2),'-r');
+% end
+% for i=1:size(gridSource5,1)-1
+%     plot(gridSource5(i:i+1,1),gridSource5(i:i+1,2),'-r');
+% end
+% for i=1:size(gridSource6,1)-1
+%     plot(gridSource6(i:i+1,1),gridSource6(i:i+1,2),'-r');
+% end
+% for i=1:size(gridSource7,1)-1
+%     plot(gridSource7(i:i+1,1),gridSource7(i:i+1,2),'-r');
+% end
+% for i=1:size(gridSource8,1)-1
+%     plot(gridSource8(i:i+1,1),gridSource8(i:i+1,2),'-r');
+% end
 
 
 % hObject    handle to axes1 (see GCBO)
