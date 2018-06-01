@@ -92,37 +92,37 @@ function LoadButton_Callback(hObject, eventdata, handles)
 % hObject    handle to LoadButton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-% evalin('base','ComId = Com_construct');
-% evalin('base','MotorId0 = Motor_construct( 0 )');
-% evalin('base','MotorId1 = Motor_construct( 1 )');
-% evalin('base','MotorId2 = Motor_construct( 2 )');
-% evalin('base','CameraId = Camera_construct');
-% evalin('base','OdometryId = Odometry_construct');
-% evalin('base','Com_setAddress(ComId, ''192.168.1.203'')');
-% evalin('base','Com_connect(ComId)');
-% evalin('base','Motor_setComId( MotorId0, ComId )');
-% evalin('base','Motor_setComId( MotorId1, ComId )');
-% evalin('base','Motor_setComId( MotorId2, ComId )');
-% evalin('base','Camera_setComId(CameraId, ComId)');
-% evalin('base','Odometry_setComId( OdometryId, ComId )');
-% evalin('base','clc');
-% evalin('base','clear img');
-% evalin('base','load ExtrinsicResults.mat');
-% evalin('base','clear theta');
-% Rc_ext=evalin('base','Rc_ext');
-% Tc_ext=evalin('base','Tc_ext');
-% KK=evalin('base','KK');
-% CameraId=evalin('base','CameraId');
-% while evalin('base','exist(''img'')~=1')
-%      if ~(Camera_setStreaming(CameraId, 1) == 1)
-%         disp('Camera_setStreaming failed.');
-%      end
-%      if (Camera_grab(CameraId) == 1)
-%         img = Camera_getImage( CameraId );
-%         assignin('base','img',img);
-%      end
-%      pause(.1);
-% end
+evalin('base','ComId = Com_construct');
+evalin('base','MotorId0 = Motor_construct( 0 )');
+evalin('base','MotorId1 = Motor_construct( 1 )');
+evalin('base','MotorId2 = Motor_construct( 2 )');
+evalin('base','CameraId = Camera_construct');
+evalin('base','OdometryId = Odometry_construct');
+evalin('base','Com_setAddress(ComId, ''192.168.1.203'')');
+evalin('base','Com_connect(ComId)');
+evalin('base','Motor_setComId( MotorId0, ComId )');
+evalin('base','Motor_setComId( MotorId1, ComId )');
+evalin('base','Motor_setComId( MotorId2, ComId )');
+evalin('base','Camera_setComId(CameraId, ComId)');
+evalin('base','Odometry_setComId( OdometryId, ComId )');
+evalin('base','clc');
+evalin('base','clear img');
+evalin('base','load ExtrinsicResults.mat');
+evalin('base','clear theta');
+Rc_ext=evalin('base','Rc_ext');
+Tc_ext=evalin('base','Tc_ext');
+KK=evalin('base','KK');
+CameraId=evalin('base','CameraId');
+while evalin('base','exist(''img'')~=1')
+     if ~(Camera_setStreaming(CameraId, 1) == 1)
+        disp('Camera_setStreaming failed.');
+     end
+     if (Camera_grab(CameraId) == 1)
+        img = Camera_getImage( CameraId );
+        assignin('base','img',img);
+     end
+     pause(.1);
+end
 
 % (msgbox('Cam initialised and robot ready to go!','Information to the user','warn'))
 set(handles.text2,'BackgroundColor','green');

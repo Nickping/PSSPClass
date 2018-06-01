@@ -308,17 +308,24 @@ end
 function pushbutton5_Callback(hObject, eventdata, handles)
 DistanceMatrix = evalin('base','DistanceMatrix');
 algorithm = evalin('base','Algorithm');
-ListOfWp = pathPlanning(DistanceMatrix,0,1,16,algorithm);
+ListOfWp = pathPlanning(DistanceMatrix,0,1,10,algorithm);
 Nodes = NodesToCoordinates(ListOfWp);
 
 assignin('base','Coordinates',Nodes);
 assignin('base','ListOfWp',ListOfWp);
-if evalin('base','Algorithm') == 0
-%ListOfWp = transpose(ListOfWp);
+
+if evalin('base','Algorithm') ~= 0 %
+ListOfWp = transpose(ListOfWp);
+end
+
 NodeStr = num2str(ListOfWp);
 disp(NodeStr);
 NodesToGo = findobj('Tag','Node');
+
 set(NodesToGo,'string',NodeStr);
+
+EditListOfWayPoints = findobj('Tag','EditListOfWayPoints');
+set(EditListOfWayPoints,'string',NodeStr);
 
 
 
