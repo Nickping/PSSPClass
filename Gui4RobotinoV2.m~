@@ -343,6 +343,7 @@ hold on;
 %handels.Name,....
 
 %hold on- >CreateFcn 
+set
 for i=1:size(gridSource1,1)-1
 
     plot(gridSource1(i:i+1,1),gridSource1(i:i+1,2),'-r');
@@ -390,15 +391,11 @@ algorithm = contents{get(hObject,'Value')};
 
 disp(contents{get(hObject,'Value')});
 if strcmp(algorithm,'Greedy')
-    assignin('base','Algorithm',0);
+    
 end
 if strcmp(algorithm,'A star')
-        assignin('base','Algorithm',1);
-
 end
 if strcmp(algorithm,'Dijkstra')
-        assignin('base','Algorithm',2);
-
 end
 
 % Hints: contents = cellstr(get(hObject,'String')) returns listbox1 contents as cell array
