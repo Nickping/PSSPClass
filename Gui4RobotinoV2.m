@@ -22,7 +22,7 @@ function varargout = Gui4RobotinoV2(varargin)
 
 % Edit the above text to modify the response to help Gui4RobotinoV2
 
-% Last Modified by GUIDE v2.5 29-May-2018 13:22:06
+% Last Modified by GUIDE v2.5 01-Jun-2018 10:32:26
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -338,8 +338,75 @@ function pushbutton6_Callback(hObject, eventdata, handles)
 function axes1_CreateFcn(hObject, eventdata, handles)
 
 hold on;
+           
+%handels.Name,....
+
+%hold on- >CreateFcn 
+for i=1:size(gridSource1,1)-1
+
+    plot(gridSource1(i:i+1,1),gridSource1(i:i+1,2),'-r');
+
+end
+for i=1:size(gridSource2,1)-1
+    plot(gridSource2(i:i+1,1),gridSource2(i:i+1,2),'-r');
+end
+
+for i=1:size(gridSource3,1)-1
+    plot(gridSource3(i:i+1,1),gridSource3(i:i+1,2),'-r');
+end
+for i=1:size(gridSource4,1)-1
+    plot(gridSource4(i:i+1,1),gridSource4(i:i+1,2),'-r');
+end
+for i=1:size(gridSource5,1)-1
+    plot(gridSource5(i:i+1,1),gridSource5(i:i+1,2),'-r');
+end
+for i=1:size(gridSource6,1)-1
+    plot(gridSource6(i:i+1,1),gridSource6(i:i+1,2),'-r');
+end
+for i=1:size(gridSource7,1)-1
+    plot(gridSource7(i:i+1,1),gridSource7(i:i+1,2),'-r');
+end
+for i=1:size(gridSource8,1)-1
+    plot(gridSource8(i:i+1,1),gridSource8(i:i+1,2),'-r');
+end
+
+
 % hObject    handle to axes1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
 % Hint: place code in OpeningFcn to populate axes1
+
+
+% --- Executes on selection change in listbox1.
+function listbox1_Callback(hObject, eventdata, handles)
+% hObject    handle to listbox1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+contents = cellstr(get(hObject, 'String'));
+disp(contents{get(hObject,'Value')});
+% Hints: contents = cellstr(get(hObject,'String')) returns listbox1 contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from listbox1
+
+
+% --- Executes during object creation, after setting all properties.
+function listbox1_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to listbox1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: listbox controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes during object creation, after setting all properties.
+function pushbutton6_CreateFcn(hObject, eventdata, handles)
+
+
+% hObject    handle to pushbutton6 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
