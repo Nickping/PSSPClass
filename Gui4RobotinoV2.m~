@@ -252,7 +252,7 @@ Rc_ext=evalin('base','Rc_ext');
 Tc_ext=evalin('base','Tc_ext');
 KK=evalin('base','KK');
 InitialNode=evalin('base','ListOfWayPoints(1)');
-set(handles.text13,'String',num2str(InitialNode));
+set(handles.text13,'String',num2str(InitialNode));%actual Node
 InitialAngle=evalin('base','InitialAngle');
 set(handles.text15,'String','');
 TargetNode=evalin('base','ListOfWayPoints(2)');
@@ -312,7 +312,8 @@ ListOfWp = pathPlanning(DistanceMatrix,0,1,10,algorithm);
 Nodes = NodesToCoordinates(ListOfWp);
 
 assignin('base','Coordinates',Nodes);
-assignin('base','ListOfWp',ListOfWp);
+%assignin('base','ListOfWp',ListOfWp);
+assignin('base','ListOfWayPoints',ListOfWp);
 
 if evalin('base','Algorithm') ~= 0 %
 ListOfWp = transpose(ListOfWp);

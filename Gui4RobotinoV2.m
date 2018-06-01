@@ -241,6 +241,26 @@ function GoButton_Callback(hObject, eventdata, handles)
 % hObject    handle to GoButton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+%%%% Find every Text Object
+Node1 = findobj('Tag','Node1');
+Node2 = findobj('Tag','Node2');
+Node3 = findobj('Tag','Node3');
+Node4 = findobj('Tag','Node4');
+Node5 = findobj('Tag','Node5');
+Node6 = findobj('Tag','Node6');
+Node7 = findobj('Tag','Node7');
+Node8 = findobj('Tag','Node8');
+Node9 = findobj('Tag','Node9');
+Node10 = findobj('Tag','Node10');
+Node11 = findobj('Tag','Node11');
+Node12 = findobj('Tag','Node12');
+Node13 = findobj('Tag','Node13');
+Node14 = findobj('Tag','Node14');
+Node15 = findobj('Tag','Node15');
+Node16 = findobj('Tag','Node16');
+
+%%%
 set(handles.GoButton,'BackgroundColor','yellow');
 ComId=evalin('base','ComId');
 OdometryId=evalin('base','OdometryId');
@@ -252,11 +272,11 @@ Rc_ext=evalin('base','Rc_ext');
 Tc_ext=evalin('base','Tc_ext');
 KK=evalin('base','KK');
 InitialNode=evalin('base','ListOfWayPoints(1)');
-set(handles.text13,'String',num2str(InitialNode));
+set(handles.text13,'String',num2str(InitialNode));%actual Node
 InitialAngle=evalin('base','InitialAngle');
 set(handles.text15,'String','');
 TargetNode=evalin('base','ListOfWayPoints(2)');
-set(handles.text14,'String',num2str(TargetNode));
+set(handles.text14,'String',num2str(TargetNode));%next node
 evalin('base','clear EndAngle');
 ListOfWayPoints=evalin('base','ListOfWayPoints');
 for i=1:length(ListOfWayPoints)-1
