@@ -22,7 +22,7 @@ function varargout = Gui4RobotinoV2(varargin)
 
 % Edit the above text to modify the response to help Gui4RobotinoV2
 
-% Last Modified by GUIDE v2.5 01-Jun-2018 10:32:26
+% Last Modified by GUIDE v2.5 08-Jun-2018 12:46:31
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -72,6 +72,9 @@ DistanceMatrix(IndexInf)=Inf;
 assignin('base','DistanceMatrix',DistanceMatrix);
 drawingGridlayout();
 
+assignin('base','StartNode','1');
+assignin('base','EndNode','10');
+
 function drawingGridlayout()
 
 
@@ -92,37 +95,39 @@ function LoadButton_Callback(hObject, eventdata, handles)
 % hObject    handle to LoadButton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-evalin('base','ComId = Com_construct');
-evalin('base','MotorId0 = Motor_construct( 0 )');
-evalin('base','MotorId1 = Motor_construct( 1 )');
-evalin('base','MotorId2 = Motor_construct( 2 )');
-evalin('base','CameraId = Camera_construct');
-evalin('base','OdometryId = Odometry_construct');
-evalin('base','Com_setAddress(ComId, ''192.168.1.203'')');
-evalin('base','Com_connect(ComId)');
-evalin('base','Motor_setComId( MotorId0, ComId )');
-evalin('base','Motor_setComId( MotorId1, ComId )');
-evalin('base','Motor_setComId( MotorId2, ComId )');
-evalin('base','Camera_setComId(CameraId, ComId)');
-evalin('base','Odometry_setComId( OdometryId, ComId )');
-evalin('base','clc');
-evalin('base','clear img');
-evalin('base','load ExtrinsicResults.mat');
-evalin('base','clear theta');
-Rc_ext=evalin('base','Rc_ext');
-Tc_ext=evalin('base','Tc_ext');
-KK=evalin('base','KK');
-CameraId=evalin('base','CameraId');
-while evalin('base','exist(''img'')~=1')
-     if ~(Camera_setStreaming(CameraId, 1) == 1)
-        disp('Camera_setStreaming failed.');
-     end
-     if (Camera_grab(CameraId) == 1)
-        img = Camera_getImage( CameraId );
-        assignin('base','img',img);
-     end
-     pause(.1);
-end
+
+
+% evalin('base','ComId = Com_construct');
+% evalin('base','MotorId0 = Motor_construct( 0 )');
+% evalin('base','MotorId1 = Motor_construct( 1 )');
+% evalin('base','MotorId2 = Motor_construct( 2 )');
+% evalin('base','CameraId = Camera_construct');
+% evalin('base','OdometryId = Odometry_construct');
+% evalin('base','Com_setAddress(ComId, ''192.168.1.203'')');
+% evalin('base','Com_connect(ComId)');
+% evalin('base','Motor_setComId( MotorId0, ComId )');
+% evalin('base','Motor_setComId( MotorId1, ComId )');
+% evalin('base','Motor_setComId( MotorId2, ComId )');
+% evalin('base','Camera_setComId(CameraId, ComId)');
+% evalin('base','Odometry_setComId( OdometryId, ComId )');
+% evalin('base','clc');
+% evalin('base','clear img');
+% evalin('base','load ExtrinsicResults.mat');
+% evalin('base','clear theta');
+% Rc_ext=evalin('base','Rc_ext');
+% Tc_ext=evalin('base','Tc_ext');
+% KK=evalin('base','KK');
+% CameraId=evalin('base','CameraId');
+% while evalin('base','exist(''img'')~=1')
+%      if ~(Camera_setStreaming(CameraId, 1) == 1)
+%         disp('Camera_setStreaming failed.');
+%      end
+%      if (Camera_grab(CameraId) == 1)
+%         img = Camera_getImage( CameraId );
+%         assignin('base','img',img);
+%      end
+%      pause(.1);
+% end
 
 % (msgbox('Cam initialised and robot ready to go!','Information to the user','warn'))
 set(handles.text2,'BackgroundColor','green');
@@ -282,6 +287,11 @@ ListOfWayPoints=evalin('base','ListOfWayPoints');
 for i=1:length(ListOfWayPoints)-1
     InitialNode=ListOfWayPoints(i);
     TargetNode=ListOfWayPoints(i+1);
+    
+    disp('InitialNode');
+    disp(InitialNode);
+    disp('TargetNode');
+    disp(TargetNode);
     set(handles.text14,'String',num2str(TargetNode));
     set(handles.text13,'String',num2str(InitialNode));
     [ EndNode,EndAngle ] = RunningFreeWithoutDisconnection( InitialNode,TargetNode,InitialAngle,MotorId0,MotorId1,MotorId2,CameraId,OdometryId,Rc_ext,Tc_ext,KK );
@@ -328,8 +338,14 @@ end
 function pushbutton5_Callback(hObject, eventdata, handles)
 DistanceMatrix = evalin('base','DistanceMatrix');
 algorithm = evalin('base','Algorithm');
-ListOfWp = pathPlanning(DistanceMatrix,0,1,10,algorithm);
+
+StartNode = evalin('base','StartNode');
+EndNode = evalin('base','EndNode');
+StartNode = str2num(StartNode);
+EndNode = str2num(EndNode);
+ListOfWp = pathPlanning(DistanceMatrix,0,StartNode,EndNode,algorithm);
 Nodes = NodesToCoordinates(ListOfWp);
+
 
 assignin('base','Coordinates',Nodes);
 %assignin('base','ListOfWp',ListOfWp);
@@ -379,15 +395,13 @@ Node16 = findobj('Tag','Node16');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 NodesToGo = evalin('base','ListOfWayPoints');
-disp('NodesToGoTest');
-disp(NodesToGo);
+
 % disp(num2str(NodesToGo(1,2)));
 
 % disp(NodesToChangeColor);
 
 
 sizeOfNodes = size(NodesToGo);
-disp(sizeOfNodes);
 for i = 1: sizeOfNodes(1,2)
     
     switch NodesToGo(1,i)
@@ -497,3 +511,56 @@ function pushbutton6_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to pushbutton6 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
+
+
+
+function edit8_Callback(hObject, eventdata, handles)
+% hObject    handle to edit8 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit8 as text
+%        str2double(get(hObject,'String')) returns contents of edit8 as a double
+
+start = get(hObject,'String');
+assignin('base','StartNode',start);
+
+
+% --- Executes during object creation, after setting all properties.
+function edit8_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit8 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function edit9_Callback(hObject, eventdata, handles)
+% hObject    handle to edit9 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit9 as text
+%        str2double(get(hObject,'String')) returns contents of edit9 as a double
+
+End = get(hObject,'String');
+assignin('base','EndNode',End);
+
+
+
+% --- Executes during object creation, after setting all properties.
+function edit9_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit9 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
