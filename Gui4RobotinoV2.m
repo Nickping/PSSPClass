@@ -296,6 +296,55 @@ for i=1:length(ListOfWayPoints)-1
     set(handles.text13,'String',num2str(InitialNode));
     [ EndNode,EndAngle ] = RunningFreeWithoutDisconnection( InitialNode,TargetNode,InitialAngle,MotorId0,MotorId1,MotorId2,CameraId,OdometryId,Rc_ext,Tc_ext,KK );
     InitialAngle=EndAngle;
+    
+    
+     switch InitialNode
+        case 1
+            set(Node1,'BackgroundColor','green');
+        case 2
+            set(Node2,'BackgroundColor','green');
+        case 3
+            set(Node3,'BackgroundColor','green');
+        case 4
+                 set(Node4,'BackgroundColor','green');
+
+        case 5
+                        set(Node5,'BackgroundColor','green');
+
+        case 6
+                        set(Node6,'BackgroundColor','green');
+
+        case 7
+                        set(Node7,'BackgroundColor','green');
+
+        case 8
+                        set(Node8,'BackgroundColor','green');
+
+        case 9
+                        set(Node9,'BackgroundColor','green');
+
+        case 10
+                        set(Node10,'BackgroundColor','green');
+
+        case 11
+                        set(Node11,'BackgroundColor','green');
+
+        case 12
+                        set(Node12,'BackgroundColor','green');
+
+        case 13
+                        set(Node13,'BackgroundColor','green');
+
+        case 14
+                        set(Node14,'BackgroundColor','green');
+
+        case 15
+                        set(Node15,'BackgroundColor','green');
+
+        case 16
+                        set(Node16,'BackgroundColor','green');
+
+    end
 end
 
 % % % while evalin('base','~exist(''EndAngle'')')
@@ -306,7 +355,7 @@ set(handles.GoButton,'BackgroundColor','green');
 pause(1)
 set(handles.GoButton,'BackgroundColor','red');
 set(handles.EditInitialAngle,'String',num2str(EndAngle));
-assignin('base','InitialAngle',EndAngle);
+assignin('base','InitialAngle',EndAngle); 
 
 
 
@@ -453,6 +502,75 @@ for i = 1: sizeOfNodes(1,2)
     end
     
 
+    
+end
+
+function clearPane()
+Node1 = findobj('Tag','Node1');
+Node2 = findobj('Tag','Node2');
+Node3 = findobj('Tag','Node3');
+Node4 = findobj('Tag','Node4');
+Node5 = findobj('Tag','Node5');
+Node6 = findobj('Tag','Node6');
+Node7 = findobj('Tag','Node7');
+Node8 = findobj('Tag','Node8');
+Node9 = findobj('Tag','Node9');
+Node10 = findobj('Tag','Node10');
+Node11 = findobj('Tag','Node11');
+Node12 = findobj('Tag','Node12');
+Node13 = findobj('Tag','Node13');
+Node14 = findobj('Tag','Node14');
+Node15 = findobj('Tag','Node15');
+Node16 = findobj('Tag','Node16');
+
+for i=1: 16
+     switch i
+        case 1
+            set(Node1,'BackgroundColor','grey');
+        case 2
+            set(Node2,'BackgroundColor','grey');
+        case 3
+            set(Node3,'BackgroundColor','grey');
+        case 4
+                 set(Node4,'BackgroundColor','grey');
+
+        case 5
+                        set(Node5,'BackgroundColor','grey');
+
+        case 6
+                        set(Node6,'BackgroundColor','grey');
+
+        case 7
+                        set(Node7,'BackgroundColor','grey');
+
+        case 8
+                        set(Node8,'BackgroundColor','grey');
+
+        case 9
+                        set(Node9,'BackgroundColor','grey');
+
+        case 10
+                        set(Node10,'BackgroundColor','grey');
+
+        case 11
+                        set(Node11,'BackgroundColor','grey');
+
+        case 12
+                        set(Node12,'BackgroundColor','grey');
+
+        case 13
+                        set(Node13,'BackgroundColor','grey');
+
+        case 14
+                        set(Node14,'BackgroundColor','grey');
+
+        case 15
+                        set(Node15,'BackgroundColor','grey');
+
+        case 16
+                        set(Node16,'BackgroundColor','grey');
+
+    end
     
 end
 

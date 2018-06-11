@@ -72,6 +72,9 @@ DistanceMatrix(IndexInf)=Inf;
 assignin('base','DistanceMatrix',DistanceMatrix);
 drawingGridlayout();
 
+assignin('base','StartNode','1');
+assignin('base','EndNode','10');
+
 function drawingGridlayout()
 
 
@@ -284,6 +287,11 @@ ListOfWayPoints=evalin('base','ListOfWayPoints');
 for i=1:length(ListOfWayPoints)-1
     InitialNode=ListOfWayPoints(i);
     TargetNode=ListOfWayPoints(i+1);
+    
+    disp('InitialNode');
+    disp(InitialNode);
+    disp('TargetNode');
+    disp(TargetNode);
     set(handles.text14,'String',num2str(TargetNode));
     set(handles.text13,'String',num2str(InitialNode));
     [ EndNode,EndAngle ] = RunningFreeWithoutDisconnection( InitialNode,TargetNode,InitialAngle,MotorId0,MotorId1,MotorId2,CameraId,OdometryId,Rc_ext,Tc_ext,KK );
@@ -298,7 +306,7 @@ set(handles.GoButton,'BackgroundColor','green');
 pause(1)
 set(handles.GoButton,'BackgroundColor','red');
 set(handles.EditInitialAngle,'String',num2str(EndAngle));
-assignin('base','InitialAngle',EndAngle);
+assignin('base','InitialAngle',EndAngle); 
 
 
 
@@ -331,9 +339,13 @@ function pushbutton5_Callback(hObject, eventdata, handles)
 DistanceMatrix = evalin('base','DistanceMatrix');
 algorithm = evalin('base','Algorithm');
 
-StartNode = evalin('base','StartNode'
-ListOfWp = pathPlanning(DistanceMatrix,0,1,10,algorithm);
+StartNode = evalin('base','StartNode');
+EndNode = evalin('base','EndNode');
+StartNode = str2num(StartNode);
+EndNode = str2num(EndNode);
+ListOfWp = pathPlanning(DistanceMatrix,0,StartNode,EndNode,algorithm);
 Nodes = NodesToCoordinates(ListOfWp);
+
 
 assignin('base','Coordinates',Nodes);
 %assignin('base','ListOfWp',ListOfWp);
@@ -383,15 +395,13 @@ Node16 = findobj('Tag','Node16');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 NodesToGo = evalin('base','ListOfWayPoints');
-disp('NodesToGoTest');
-disp(NodesToGo);
+
 % disp(num2str(NodesToGo(1,2)));
 
 % disp(NodesToChangeColor);
 
 
 sizeOfNodes = size(NodesToGo);
-disp(sizeOfNodes);
 for i = 1: sizeOfNodes(1,2)
     
     switch NodesToGo(1,i)
@@ -445,6 +455,8 @@ for i = 1: sizeOfNodes(1,2)
 
     
 end
+
+function clearPane
 
 
 % hObject    handle to pushbutton6 (see GCBO)
