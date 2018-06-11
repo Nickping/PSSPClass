@@ -450,6 +450,10 @@ NodesToGo = evalin('base','ListOfWayPoints');
 
 % disp(NodesToChangeColor);
 
+
+
+
+
 %markFirstNode();
 
 sizeOfNodes = size(NodesToGo);
