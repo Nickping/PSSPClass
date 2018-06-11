@@ -27,11 +27,11 @@ function varargout = Gui4RobotinoV2(varargin)
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
 gui_State = struct('gui_Name',       mfilename, ...
-                   'gui_Singleton',  gui_Singleton, ...
-                   'gui_OpeningFcn', @Gui4RobotinoV2_OpeningFcn, ...
-                   'gui_OutputFcn',  @Gui4RobotinoV2_OutputFcn, ...
-                   'gui_LayoutFcn',  [] , ...
-                   'gui_Callback',   []);
+    'gui_Singleton',  gui_Singleton, ...
+    'gui_OpeningFcn', @Gui4RobotinoV2_OpeningFcn, ...
+    'gui_OutputFcn',  @Gui4RobotinoV2_OutputFcn, ...
+    'gui_LayoutFcn',  [] , ...
+    'gui_Callback',   []);
 if nargin && ischar(varargin{1})
     gui_State.gui_Callback = str2func(varargin{1});
 end
@@ -80,7 +80,7 @@ function drawingGridlayout()
 
 
 % --- Outputs from this function are returned to the command line.
-function varargout = Gui4RobotinoV2_OutputFcn(hObject, eventdata, handles) 
+function varargout = Gui4RobotinoV2_OutputFcn(hObject, eventdata, handles)
 % varargout  cell array for returning output args (see VARARGOUT);
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -159,7 +159,7 @@ evalin('base','Odometry_destroy( OdometryId );');
 if evalin('base','ExitFlag')
     close(Gui4RobotinoV2);
 end
-    
+
 
 function EditInitialNode_Callback(hObject, eventdata, handles)
 % hObject    handle to EditInitialNode (see GCBO)
@@ -284,6 +284,7 @@ TargetNode=evalin('base','ListOfWayPoints(2)');
 set(handles.text14,'String',num2str(TargetNode));%next node
 evalin('base','clear EndAngle');
 ListOfWayPoints=evalin('base','ListOfWayPoints');
+
 for i=1:length(ListOfWayPoints)-1
     InitialNode=ListOfWayPoints(i);
     TargetNode=ListOfWayPoints(i+1);
@@ -298,7 +299,7 @@ for i=1:length(ListOfWayPoints)-1
     InitialAngle=EndAngle;
     
     
-     switch InitialNode
+    switch InitialNode
         case 1
             set(Node1,'BackgroundColor','green');
         case 2
@@ -306,44 +307,44 @@ for i=1:length(ListOfWayPoints)-1
         case 3
             set(Node3,'BackgroundColor','green');
         case 4
-                 set(Node4,'BackgroundColor','green');
-
+            set(Node4,'BackgroundColor','green');
+            
         case 5
-                        set(Node5,'BackgroundColor','green');
-
+            set(Node5,'BackgroundColor','green');
+            
         case 6
-                        set(Node6,'BackgroundColor','green');
-
+            set(Node6,'BackgroundColor','green');
+            
         case 7
-                        set(Node7,'BackgroundColor','green');
-
+            set(Node7,'BackgroundColor','green');
+            
         case 8
-                        set(Node8,'BackgroundColor','green');
-
+            set(Node8,'BackgroundColor','green');
+            
         case 9
-                        set(Node9,'BackgroundColor','green');
-
+            set(Node9,'BackgroundColor','green');
+            
         case 10
-                        set(Node10,'BackgroundColor','green');
-
+            set(Node10,'BackgroundColor','green');
+            
         case 11
-                        set(Node11,'BackgroundColor','green');
-
+            set(Node11,'BackgroundColor','green');
+            
         case 12
-                        set(Node12,'BackgroundColor','green');
-
+            set(Node12,'BackgroundColor','green');
+            
         case 13
-                        set(Node13,'BackgroundColor','green');
-
+            set(Node13,'BackgroundColor','green');
+            
         case 14
-                        set(Node14,'BackgroundColor','green');
-
+            set(Node14,'BackgroundColor','green');
+            
         case 15
-                        set(Node15,'BackgroundColor','green');
-
+            set(Node15,'BackgroundColor','green');
+            
         case 16
-                        set(Node16,'BackgroundColor','green');
-
+            set(Node16,'BackgroundColor','green');
+            
     end
 end
 
@@ -355,7 +356,7 @@ set(handles.GoButton,'BackgroundColor','green');
 pause(1)
 set(handles.GoButton,'BackgroundColor','red');
 set(handles.EditInitialAngle,'String',num2str(EndAngle));
-assignin('base','InitialAngle',EndAngle); 
+assignin('base','InitialAngle',EndAngle);
 
 
 
@@ -399,7 +400,7 @@ Nodes = NodesToCoordinates(ListOfWp);
 assignin('base','Coordinates',Nodes);
 %assignin('base','ListOfWp',ListOfWp);
 if evalin('base','Algorithm') ~= 0 %
-ListOfWp = transpose(ListOfWp);
+    ListOfWp = transpose(ListOfWp);
 end
 assignin('base','ListOfWayPoints',ListOfWp);
 
@@ -449,6 +450,7 @@ NodesToGo = evalin('base','ListOfWayPoints');
 
 % disp(NodesToChangeColor);
 
+%markFirstNode();
 
 sizeOfNodes = size(NodesToGo);
 for i = 1: sizeOfNodes(1,2)
@@ -461,118 +463,117 @@ for i = 1: sizeOfNodes(1,2)
         case 3
             set(Node3,'BackgroundColor','green');
         case 4
-                 set(Node4,'BackgroundColor','green');
-
+            set(Node4,'BackgroundColor','green');
+            
         case 5
-                        set(Node5,'BackgroundColor','green');
-
+            set(Node5,'BackgroundColor','green');
+            
         case 6
-                        set(Node6,'BackgroundColor','green');
-
+            set(Node6,'BackgroundColor','green');
+            
         case 7
-                        set(Node7,'BackgroundColor','green');
-
+            set(Node7,'BackgroundColor','green');
+            
         case 8
-                        set(Node8,'BackgroundColor','green');
-
+            set(Node8,'BackgroundColor','green');
+            
         case 9
-                        set(Node9,'BackgroundColor','green');
-
+            set(Node9,'BackgroundColor','green');
+            
         case 10
-                        set(Node10,'BackgroundColor','green');
-
+            set(Node10,'BackgroundColor','green');
+            
         case 11
-                        set(Node11,'BackgroundColor','green');
-
+            set(Node11,'BackgroundColor','green');
+            
         case 12
-                        set(Node12,'BackgroundColor','green');
-
+            set(Node12,'BackgroundColor','green');
+            
         case 13
-                        set(Node13,'BackgroundColor','green');
-
+            set(Node13,'BackgroundColor','green');
+            
         case 14
-                        set(Node14,'BackgroundColor','green');
-
+            set(Node14,'BackgroundColor','green');
+            
         case 15
-                        set(Node15,'BackgroundColor','green');
-
+            set(Node15,'BackgroundColor','green');
+            
         case 16
-                        set(Node16,'BackgroundColor','green');
-
+            set(Node16,'BackgroundColor','green');
+            
     end
     
-
+    
     
 end
-
-function clearPane()
-Node1 = findobj('Tag','Node1');
-Node2 = findobj('Tag','Node2');
-Node3 = findobj('Tag','Node3');
-Node4 = findobj('Tag','Node4');
-Node5 = findobj('Tag','Node5');
-Node6 = findobj('Tag','Node6');
-Node7 = findobj('Tag','Node7');
-Node8 = findobj('Tag','Node8');
-Node9 = findobj('Tag','Node9');
-Node10 = findobj('Tag','Node10');
-Node11 = findobj('Tag','Node11');
-Node12 = findobj('Tag','Node12');
-Node13 = findobj('Tag','Node13');
-Node14 = findobj('Tag','Node14');
-Node15 = findobj('Tag','Node15');
-Node16 = findobj('Tag','Node16');
-
-for i=1: 16
-     switch i
-        case 1
-            set(Node1,'BackgroundColor','grey');
-        case 2
-            set(Node2,'BackgroundColor','grey');
-        case 3
-            set(Node3,'BackgroundColor','grey');
-        case 4
-                 set(Node4,'BackgroundColor','grey');
-
-        case 5
-                        set(Node5,'BackgroundColor','grey');
-
-        case 6
-                        set(Node6,'BackgroundColor','grey');
-
-        case 7
-                        set(Node7,'BackgroundColor','grey');
-
-        case 8
-                        set(Node8,'BackgroundColor','grey');
-
-        case 9
-                        set(Node9,'BackgroundColor','grey');
-
-        case 10
-                        set(Node10,'BackgroundColor','grey');
-
-        case 11
-                        set(Node11,'BackgroundColor','grey');
-
-        case 12
-                        set(Node12,'BackgroundColor','grey');
-
-        case 13
-                        set(Node13,'BackgroundColor','grey');
-
-        case 14
-                        set(Node14,'BackgroundColor','grey');
-
-        case 15
-                        set(Node15,'BackgroundColor','grey');
-
-        case 16
-                        set(Node16,'BackgroundColor','grey');
-
-    end
-    
-end
+% 
+% function markFirstNode()
+% Node1 = findobj('Tag','Node1');
+% Node2 = findobj('Tag','Node2');
+% Node3 = findobj('Tag','Node3');
+% Node4 = findobj('Tag','Node4');
+% Node5 = findobj('Tag','Node5');
+% Node6 = findobj('Tag','Node6');
+% Node7 = findobj('Tag','Node7');
+% Node8 = findobj('Tag','Node8');
+% Node9 = findobj('Tag','Node9');
+% Node10 = findobj('Tag','Node10');
+% Node11 = findobj('Tag','Node11');
+% Node12 = findobj('Tag','Node12');
+% Node13 = findobj('Tag','Node13');
+% Node14 = findobj('Tag','Node14');
+% Node15 = findobj('Tag','Node15');
+% Node16 = findobj('Tag','Node16');
+% 
+% StartNode = evalin('base','StartNode');
+% switch StartNode
+%     case 1
+%         set(Node1,'BackgroundColor','blue');
+%     case 2
+%         set(Node2,'BackgroundColor','blue');
+%     case 3
+%         set(Node3,'BackgroundColor','blue');
+%     case 4
+%         set(Node4,'BackgroundColor','blue');
+%         
+%     case 5
+%         set(Node5,'BackgroundColor','blue');
+%         
+%     case 6
+%         set(Node6,'BackgroundColor','blue');
+%         
+%     case 7
+%         set(Node7,'BackgroundColor','blue');
+%         
+%     case 8
+%         set(Node8,'BackgroundColor','blue');
+%         
+%     case 9
+%         set(Node9,'BackgroundColor','blue');
+%         
+%     case 10
+%         set(Node10,'BackgroundColor','blue');
+%         
+%     case 11
+%         set(Node11,'BackgroundColor','blue');
+%         
+%     case 12
+%         set(Node12,'BackgroundColor','blue');
+%         
+%     case 13
+%         set(Node13,'BackgroundColor','blue');
+%         
+%     case 14
+%         set(Node14,'BackgroundColor','blue');
+%         
+%     case 15
+%         set(Node15,'BackgroundColor','blue');
+%         
+%     case 16
+%         set(Node16,'BackgroundColor','blue');
+%         
+% end
+% 
 
 
 % hObject    handle to pushbutton6 (see GCBO)
@@ -597,12 +598,12 @@ if strcmp(algorithm,'Greedy')
     assignin('base','Algorithm',0);
 end
 if strcmp(algorithm,'A star')
-        assignin('base','Algorithm',1);
-
+    assignin('base','Algorithm',1);
+    
 end
 if strcmp(algorithm,'Dijkstra')
-        assignin('base','Algorithm',2);
-
+    assignin('base','Algorithm',2);
+    
 end
 
 % Hints: contents = cellstr(get(hObject,'String')) returns listbox1 contents as cell array
